@@ -1,34 +1,38 @@
-import time
-import board
-import usb_hid
-from adafruit_hid.keyboard import Keyboard
-from adafruit_hid.keycode import Keycode
-from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>You Are An Idiot School</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-family: "Arial Black", Gadget, sans-serif;
+            text-align: center;
+            margin-top: 10vh;
+            /* Optional: Simple CSS flashing effect to match the original style */
+            animation: flash 0.5s infinite;
+        }
 
-kbd = Keyboard(usb_hid.devices)
-layout = KeyboardLayoutUS(kbd)
+        h1 {
+            font-size: 5rem;
+        }
 
-time.sleep(5.0)
+        .smiley {
+            font-size: 12rem;
+            line-height: 1;
+        }
 
+        @keyframes flash {
+            50% { background-color: black; color: white; }
+        }
+    </style>
+</head>
+<body>
 
-TARGET_URL = "https://wikipedia.org"
+    <div class="smiley">☺</div>
+    <h1>You are an idiot!</h1>
+    <div class="smiley">☺ ☺</div>
 
-def open_website(url):
-    # 1. Open a new Chrome tab (Ctrl + T)
-    kbd.press(Keycode.CONTROL)
-    kbd.press(Keycode.T)
-    time.sleep(0.05)
-    kbd.release_all()
-    
-    time.sleep(0.2) # Short wait for the tab to initialize
-
-    layout.write(url)
-    time.sleep(0.05)
-    
-
-    kbd.press(Keycode.ENTER)
-    kbd.release_all()
-
-while True:
-    open_website(TARGET_URL)
-    time.sleep(1.0) # Delays exactly 1 second before opening the next tab
+</body>
+</html>
