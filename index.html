@@ -1,0 +1,34 @@
+import time
+import board
+import usb_hid
+from adafruit_hid.keyboard import Keyboard
+from adafruit_hid.keycode import Keycode
+from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
+
+kbd = Keyboard(usb_hid.devices)
+layout = KeyboardLayoutUS(kbd)
+
+time.sleep(5.0)
+
+
+TARGET_URL = "https://wikipedia.org"
+
+def open_website(url):
+    # 1. Open a new Chrome tab (Ctrl + T)
+    kbd.press(Keycode.CONTROL)
+    kbd.press(Keycode.T)
+    time.sleep(0.05)
+    kbd.release_all()
+    
+    time.sleep(0.2) # Short wait for the tab to initialize
+
+    layout.write(url)
+    time.sleep(0.05)
+    
+
+    kbd.press(Keycode.ENTER)
+    kbd.release_all()
+
+while True:
+    open_website(TARGET_URL)
+    time.sleep(1.0) # Delays exactly 1 second before opening the next tab
